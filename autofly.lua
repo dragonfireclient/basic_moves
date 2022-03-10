@@ -31,8 +31,7 @@ ws.rg('Fly2d','Movement','afly2d',function()
     if dst > autofly.landing_distance then
         ws.aim(autofly.tpos)
     else
-        minetest.settings:set_bool('continuous_forward',false)
-        minetest.settings:set_bool('afly2d',false)
+        return true
     end
 end,function()
     if not poi.last_pos or not poi.last_name then
