@@ -25,6 +25,7 @@ end,function()
 end,function()
 end,{'continuous_forward'})
 
+
 ws.rg('Fly2d','Movement','afly2d',function()
 	if not poi.last_pos then return end
 	autofly.tpos=poi.last_pos
@@ -80,11 +81,12 @@ end,{'continuous_forward'})
 function autofly.warp(name)
 	local pos=autofly.get_waypoint(name)
 	if pos then
-		if get_dimension(pos) == "void" then return false end
+		if ws.get_dimension(pos) == "void" then return false end
 		minetest.localplayer:set_pos(pos)
 		return true
 	end
 end
+
 local function goto(pos,name,method)
 	poi.last_pos=pos
 	poi.last_name=name
