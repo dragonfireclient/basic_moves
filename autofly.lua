@@ -48,7 +48,13 @@ end,function()
 	autofly.name=poi.last_name
 	minetest.settings:set_bool('continuous_forward',true)
 	local tdst=vector.distance(autofly.tpos,poi.last_pos)
-	poi.display(autofly.tpos,"Target " .. tdst .. 'm above actual target '..poi.last_name)
+
+	local above_or_below = "above"
+	if autofly.tpos.y < poi.last_pos.y then
+		above_or_below = "below"
+	end
+
+	poi.display(autofly.tpos,"Target " .. tdst .. "m "..above_or_below .." actual target '"..poi.last_name.."'")
 end,function()
 	poi.display(autofly.atpos,autofly.name)
 	ws.aim(autofly.atpos)
