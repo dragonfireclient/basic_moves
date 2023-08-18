@@ -87,12 +87,12 @@ function autofly.warp(name)
 	end
 end
 
-local function goto(pos,name,method)
+local function go_to(pos,name,method)
 	poi.last_pos=pos
 	poi.last_name=name
 	minetest.settings:set_bool(method,true)
 end
 
-poi.register_transport('Fly3D',function(pos,name) goto(pos,name,'afly3d') end)
-poi.register_transport('Fly2D',function(pos,name) goto(pos,name,'afly2d') end)
-poi.register_transport('Nroof',function(pos,name) goto(pos,name,'aflynroof') end)
+poi.register_transport('Fly3D',function(pos,name) go_to(pos,name,'afly3d') end)
+poi.register_transport('Fly2D',function(pos,name) go_to(pos,name,'afly2d') end)
+poi.register_transport('Nroof',function(pos,name) go_to(pos,name,'aflynroof') end)
