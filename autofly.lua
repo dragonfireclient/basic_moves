@@ -31,9 +31,9 @@ ws.rg('Fly2d','Movement','afly2d',function()
 	local lp=ws.dircoord(0,0,0)
 	local dst=vector.distance(lp,autofly.tpos)
 	poi.set_hud_info("Fly2d")
-	if dst > autofly.landing_distance then
+	if dst > autofly.landing_distance and minetest.settings:get_bool("continuous_forward",false) then
 		ws.aim(autofly.tpos)
-	else
+	elseif dst <= autofly.landing_distance then
 		return true
 	end
 end,function()
