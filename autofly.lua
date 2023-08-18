@@ -2,7 +2,6 @@ autofly={}
 autofly.landing_distance=15
 autofly.tpos=nil
 autofly.atpos=nil
-autofly.etatime=-1
 
 
 ws.rg('Fly3d','Movement','afly3d',function()
@@ -71,6 +70,7 @@ end,function()
 		ws.dcm('Select a poi first.')
 		return true
 	end
+	local lp = ws.dircoord(0,0,0)
 	poi.set_hud_info("FlyNroof")
 	minetest.settings:set_bool('continuous_forward',true)
 	autofly.tpos=vector.new(poi.last_pos.x / 8,lp.y,poi.last_pos.z / 8)
