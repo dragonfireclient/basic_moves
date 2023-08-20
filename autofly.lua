@@ -22,7 +22,7 @@ end,function()
 	poi.set_hud_info("Fly3d")
 	poi.display(poi.last_pos,poi.last_name )
 end,function()
-end,{'continuous_forward'})
+end,{'continuous_forward',"pitch_move"})
 
 
 ws.rg('Fly2d','Movement','afly2d',function()
