@@ -9,8 +9,8 @@ ws.rg('Fly3d','Movement','afly3d',function()
 	local lp=ws.dircoord(0,0,0)
 	local dst=vector.distance(lp,poi.last_pos)
 	poi.set_hud_info("Fly3d")
-	if dst > autofly.landing_distance then
-		ws.aim(poi.last_pos)
+	if dst > autofly.landing_distance and minetest.settings:get_bool("continuous_forward", false) then
+		ws.aim(autofly.tpos)
 	else
 		minetest.settings:set_bool('afly3d',false)
 	end
@@ -19,8 +19,9 @@ end,function()
 		ws.dcm('Select a poi first.')
 		return true
 	end
-	poi.set_hud_info("Fly3d")
-	poi.display(poi.last_pos,poi.last_name )
+	autofly.tpos=table.copy(poi.last_pos)
+	poi.set_hud_info("Fly3D")
+	poi.display(autofly.tpos,poi.last_name )
 end,function()
 end,{'continuous_forward',"pitch_move"})
 
@@ -30,7 +31,7 @@ ws.rg('Fly2d','Movement','afly2d',function()
 	autofly.tpos=poi.last_pos
 	local lp=ws.dircoord(0,0,0)
 	local dst=vector.distance(lp,autofly.tpos)
-	poi.set_hud_info("Fly2d")
+	poi.set_hud_info("Fly2D")
 	if dst > autofly.landing_distance and minetest.settings:get_bool("continuous_forward",false) then
 		ws.aim(autofly.tpos)
 	elseif dst <= autofly.landing_distance then
@@ -64,7 +65,7 @@ ws.rg('FlyNRoof','Movement','aflynroof',function()
 	if not poi.last_pos then return end
 	local lp=ws.dircoord(0,0,0)
 	local dst=vector.distance(lp,autofly.tpos)
-	if dst > autofly.landing_distance then
+	if dst > autofly.landing_distance and minetest.settings:get_bool("continuous_forward",false) then
 		ws.aim(autofly.tpos)
 		autofly.set_info(dst)
 	else
@@ -77,7 +78,7 @@ end,function()
 		return true
 	end
 	local lp = ws.dircoord(0,0,0)
-	poi.set_hud_info("FlyNroof")
+	poi.set_hud_info("FlyNether")
 	minetest.settings:set_bool('continuous_forward',true)
 	autofly.tpos=vector.new(poi.last_pos.x / 8,lp.y,poi.last_pos.z / 8)
 	poi.display(autofly.tpos,'Target for portal.' )
